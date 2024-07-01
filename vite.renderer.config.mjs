@@ -19,14 +19,6 @@ export default defineConfig((env) => {
     },
     plugins: [
         pluginExposeRenderer(name),
-        viteStaticCopy({
-          targets: [
-            {
-              src: "node_modules/quill/dist/quill.snow.css",
-              dist: "lib/quill/",
-            }
-          ]
-        })
     ],
     resolve: {
       preserveSymlinks: true,

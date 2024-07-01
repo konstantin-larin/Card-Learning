@@ -30,11 +30,11 @@ import './index.css';
 import "./vars.css";
 import "./utils.css";
 import loadDB from "./db";
+
 import SubjectsPage from "./pages/subjects/SubjectsPage";
-
-
 
 loadDB().then(dbAccess => {
 //     активируем интерфейс
     window.dbAccess = dbAccess;
 });
+
