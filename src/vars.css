@@ -5,6 +5,6 @@ html {
 
         /*эти переменные меняются*/
         --bg-color: var(--light-color); /*относительно выбранного предмета*/
-        --color: var(--dark-color); /*при изменении --bg-color она становится либо white либо black*/
+        --txt-color: var(--dark-color); /*при изменении --bg-color она становится либо white либо black*/
 
 }
