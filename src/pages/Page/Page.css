@@ -1,0 +1,15 @@
+.page{
+    width: 100%;
+    flex-grow: 1;
+    background-color: inherit;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+    position: relative;
+}
+
+.page-smooth{
+    transition: 0.25s opacity ease-in-out;
+}

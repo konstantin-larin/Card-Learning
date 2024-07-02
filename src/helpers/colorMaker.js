@@ -1,5 +1,5 @@
-// работает с переменными в vars.css
 // нужен для изменения цветов
+import "../vars.css"
 const root = document.documentElement;
 const colorMaker = {
     hexToRgb(hex) {
@@ -23,26 +23,29 @@ const colorMaker = {
         g /= 255;
         b /= 255;
 
-        // Рассчет яркости
-        let brightness = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-
+        // Расчет яркости
+        const brightness = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        console.log(brightness);
         // Порог, определяющий более темный цвет
-        let threshold = 0.5;
+        const threshold = 0.5;
 
         // Сравнение яркости с порогом
         return brightness < threshold;
 
     },
-    _darkColor: '#1c1a1a',
-    _lightColor: "#e4dff1",
+    darkColor: '#1c1a1a',
+    lightColor: "#e4dff1",
     setBgColor(color){
         this.currentBgColor = color;
         root.style.setProperty('--bg-color', color);
 
-
-        if(this._isColorDarker(color)){
-            this.setTxtColor(this._lightColor)
-        } else this.setTxtColor(this._darkColor);
+        const rgbColor = color.startsWith('#') ? this.hexToRgb(color) : color;
+        // Инвертируем цвет текста относительно цвета фона
+        if(this._isColorDarker(rgbColor)){
+            this.setTxtColor(this.lightColor)
+        } else {
+            this.setTxtColor(this.darkColor);
+        }
     },
     setTxtColor(color){
         this.currentTxtColor = color;
@@ -50,6 +53,6 @@ const colorMaker = {
     }
 }
 
-colorMaker.setBgColor(colorMaker._lightColor);
+colorMaker.setBgColor(colorMaker.lightColor);
 
 export default  colorMaker;

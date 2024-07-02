@@ -1,29 +1,20 @@
-export default class CardsPage extends HTMLElement{
+import Page from "../Page/Page";
+
+export default class CardsPage extends Page{
+    static  tag = 'cards-page';
     constructor() {
         super();
         // элемент создан
     }
 
     connectedCallback() {
+        super.connectedCallback();
         // браузер вызывает этот метод при добавлении элемента в документ
         // (может вызываться много раз, если элемент многократно добавляется/удаляется)
     }
 
-    disconnectedCallback() {
-        // браузер вызывает этот метод при удалении элемента из документа
-        // (может вызываться много раз, если элемент многократно добавляется/удаляется)
-    }
-
-    static get observedAttributes() {
-        return [/* массив имён атрибутов для отслеживания их изменений */];
-    }
-
     attributeChangedCallback(name, oldValue, newValue) {
         // вызывается при изменении одного из перечисленных выше атрибутов
-    }
-
-    adoptedCallback() {
-        // вызывается, когда элемент перемещается в новый документ
-        // (происходит в document.adoptNode, используется очень редко)
+        super.attributeChangedCallback(name, oldValue, newValue);
     }
 }

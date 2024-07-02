@@ -1,0 +1,9 @@
+.preloader-page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.preloader-title{
+    font-size: 3rem;
+    font-weight: 700;
+}

@@ -5,8 +5,39 @@
     <title>Card Learning</title>
 </head>
 <body>
-<div id="editor-container"></div>
+<header class="header" id="header">
+    <button id="back-ref" class="button"></button>
+    <h1 id="app-title" class="app-title"></h1>
 
+</header>
+<modal-window id="modal-window"></modal-window>
+<preloader-page smooth="true" class="preloader-page d-none">
+    <h2 class="preloader-title">Card Learning</h2>
+</preloader-page>
+<subjects-page class="d-none subjects-page">
+    <h3 class="form-title">Выберите предмет</h3>
+
+    <div class="list-container">
+        <subjects-list id="subjects-list" class="subjects-list">
+            <div class="subjects-list-empty list-empty d-none">
+                Список пуст!
+            </div>
+        </subjects-list>
+        <button is="subjects-add-button" class="add-button list-add-button">
+            <svg viewBox="0 0 100 100">
+                <line x1="50" y1="20" x2="50" y2="80" stroke-width="4"/>
+                <line x1="20" y1="50" x2="80" y2="50" stroke-width="4"/>
+            </svg>
+        </button>
+    </div>
+
+
+
+
+
+</subjects-page>
+<thematics-page class="d-none"></thematics-page>
+<cards-page class="d-none"></cards-page>
 <script type="module" src="./src/renderer.js"></script>
 </body>
 </html>

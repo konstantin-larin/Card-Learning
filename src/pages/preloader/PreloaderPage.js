@@ -1,8 +1,9 @@
 import Page from "../Page/Page";
-
-export default class ThematicsPage extends Page {
-    static tag = 'thematics-page'
-
+import "./preloader.css";
+import loadDB from "../../db";
+import SubjectsPage from "../subjects/SubjectsPage";
+export default class PreloaderPage extends Page{
+    static  tag = 'preloader-page';
     constructor() {
         super();
         // элемент создан
@@ -17,5 +18,14 @@ export default class ThematicsPage extends Page {
     attributeChangedCallback(name, oldValue, newValue) {
         // вызывается при изменении одного из перечисленных выше атрибутов
         super.attributeChangedCallback(name, oldValue, newValue);
+    }
+
+    async show(){
+
+        const dbAccess = await loadDB();
+
+        window.dbAccess = dbAccess;
+        await super.show();
+        window.toPage("subjects-page");
     }
 }

@@ -19,6 +19,33 @@ export default async function loadDB(){
     });
 
     const dbAccess = {
+        async getSubjects(){
+            const subjects = db.transaction("subjects", 'readwrite').objectStore("subjects");
+            const allSubjects =  await subjects.getAll();
+            return allSubjects;
+        },
+
+        async putSubject({
+            id = +new Date() + '_subject',
+            name= "Без названия",
+            bgColor = "inherit",
+
+                         }){
+            const subject = {id, name, bgColor};
+            const subjects = db.transaction("subjects", 'readwrite').objectStore("subjects");
+            subjects.put(subject);
+        },
+
+        async getSubject(id){
+            const subjects = db.transaction("subjects", 'readwrite').objectStore("subjects");
+            return await subjects.get(id);
+        },
+
+        async deleteSubject(id){
+            const subjects = db.transaction("subjects", 'readwrite').objectStore("subjects");
+            return await subjects.delete(id);
+        }
+
     //     абстрактные методы управления бд, этот объект скрывает детали реализации, им могут пользоваться внешние компоненты
     }
     return dbAccess;

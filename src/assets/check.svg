@@ -1,0 +1,14 @@
+<svg id="svg" fill="#000000" stroke="#000000" width="29" height="29" version="1.1" viewBox="144 144 512 512"
+     xmlns="http://www.w3.org/2000/svg">
+    <g id="IconSvg_bgCarrier" stroke-width="0"></g>
+    <g id="IconSvg_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0">
+        <path xmlns="http://www.w3.org/2000/svg"
+              d="m503.2 319.23-134.93 134.93-73.684-55.262-11.965 16.215 80.609 60.457 6.9258 5.1953 147.21-147.21-14.168-14.328z"></path>
+
+    </g>
+    <g id="IconSvg_iconCarrier">
+        <path xmlns="http://www.w3.org/2000/svg"
+              d="m503.2 319.23-134.93 134.93-73.684-55.262-11.965 16.215 80.609 60.457 6.9258 5.1953 147.21-147.21-14.168-14.328z"></path>
+
+    </g>
+</svg>
