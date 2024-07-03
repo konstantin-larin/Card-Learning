@@ -1,7 +1,7 @@
 import colorMaker from "../../helpers/colorMaker";
 
-export default class SubjectItem extends HTMLElement {
-    static tag = 'subject-item';
+export default class TopicItem extends HTMLElement {
+    static tag = 'topic-item';
 
     constructor() {
         super();
@@ -10,7 +10,7 @@ export default class SubjectItem extends HTMLElement {
     }
 
     connectedCallback() {
-        this.classList.add("subject-item", 'list-item');
+        this.classList.add("topic-item", 'list-item');
         this.dataset.func = 'choose';
         const nameElement = document.createElement('span');
         nameElement.style.pointerEvents = 'none';
@@ -54,13 +54,13 @@ export default class SubjectItem extends HTMLElement {
         this.isAdded = true;
     }
 
-    async setSubjectModel({id, name, bgColor, save = true}) {
+    async setTopicModel({id, name, cardsColor, id_subject, save = true}) {
         if (!this.isAdded) {
-            throw new Error("Сначала добавьте элемент subject-item")
+            throw new Error("Сначала добавьте элемент topic-item")
         }
 
-        this._model = {id, name, bgColor};
-        if (save) await window.dbAccess.putSubject(this._model);
+        this._model = {id, name, id_subject, cardsColor};
+        if (save) await window.dbAccess.putTopic(this._model);
         this.id = id;
         this.querySelector('.list-item-name').textContent = name;
 
@@ -74,38 +74,26 @@ export default class SubjectItem extends HTMLElement {
                     switch (func) {
                         case 'choose': {
                             isChoosed = true;
-                            window.currentSubject = structuredClone(this._model);
+                            window.currentTopic = structuredClone(this._model);
                             await window.toPage('topics-page');
                             return
                         }
                         case 'edit': {
-                            const subject = await window.dbAccess.getSubject(this.id)
-                            window.currentSubject = structuredClone(subject);
-                            window.openCreateSubjectForm();
+                            const topic = await window.dbAccess.getTopic(this.id)
+                            window.currentTopic = structuredClone(topic);
+                            window.openCreateTopicForm();
                             return;
                         }
                         case 'delete': {
-                            await window.dbAccess.deleteSubject(this.id);
-                            this.closest('subjects-list').removeItem(this.id);
+                            await window.dbAccess.deleteTopic(this.id);
+                            this.closest('topics-list').removeItem(this.id);
                             setTimeout(() => {
-                                colorMaker.setBgColor(colorMaker.lightColor);
+                                colorMaker.setTxtColor(colorMaker.currentTxtColor);
                             }, 0);
                             return;
                         }
                     }
                 }
-            }
-            this.onmouseenter = () => {
-                setTimeout(() => {
-                    colorMaker.setBgColor(this._model.bgColor)
-                }, 0)
-            }
-            this.onmouseleave = () => {
-                setTimeout(() => {
-                    if (!isChoosed) {
-                        colorMaker.setBgColor(colorMaker.lightColor);
-                    }
-                }, 0);
             }
         }
     }

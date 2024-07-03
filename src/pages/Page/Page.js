@@ -70,7 +70,6 @@ export default class Page extends HTMLElement{
                 }, 0);
 
                 setTimeout(() => {
-                    console.log("Общая функция показа");
                     resolve();
                 }, this._transitionDuration);
             })

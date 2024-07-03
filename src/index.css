@@ -3,12 +3,15 @@ body {
     Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--txt-color);
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.15s
+
+ ease-in-out;
     display: flex;
     height: 100vh;
     flex-direction: column;
     user-select: none;
 }
+
 
 
 
@@ -27,16 +30,20 @@ body {
 
 #back-ref {
     position: absolute;
-    top: 1rem;
+    top: 2rem;
     left: 2rem;
+    z-index: 10;
 }
 
 .button {
     border: 2px solid var(--txt-color);
+    background-color: var(--bg-color);
     color: var(--txt-color);
     padding: 0.5rem 1rem;
     border-radius: 5px;
-    transition: 0.2s background-color ease-in-out;
+    transition: 0.15s
+
+ all ease-in-out;
 }
 .button:hover{
     color: var(--bg-color);
@@ -64,7 +71,9 @@ body {
 
 .add-button line {
     stroke: var(--txt-color);
-    transition: 0.2s stroke ease-in-out;
+    transition: 0.15s
+
+ stroke ease-in-out;
 }
 
 .add-button:hover {
@@ -109,16 +118,19 @@ body {
     width: 100%;
 }
 
+.save-button{
+    color: var(--dark-color);
+    border-color: var(--dark-color);
+    background-color: var(--light-color);
+}
 .save-button:hover {
-    color: var(--txt-color);
+    color: var(--dark-color);
     background-color: rgba(127, 255, 0, 0.7);
 }
 
 .list-container {
     position: relative;
     border-radius: 8px;
-    border: 2px solid var(--txt-color);
-    background-color: inherit;
     max-width: 50%;
 }
 
@@ -132,17 +144,20 @@ body {
     min-height: 60vh;
     max-height: 70vh; /* Установите нужную максимальную высоту */
     overflow-y: auto; /* Добавьте вертикальную прокрутку */
+
+    border: 2px solid var(--txt-color);
+    background-color: var(--bg-color);
+    color: var(--txt-color);
 }
 
 .list-item {
-    margin-top: 0.5rem;
     font-size: 1.5rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: 500;
-    padding: 0.5rem;
+    padding: 1rem 0.5rem;
     position: relative;
     cursor: pointer;
 }
@@ -154,7 +169,7 @@ body {
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    transition: 0.2s width ease-in-out;
+    transition: 0.15s width ease-in-out;
     background-color: var(--txt-color);
 }
 
@@ -179,12 +194,10 @@ body {
     border: 2px solid var(--txt-color);
     padding: 0.2rem;
     background-color: var(--bg-color);
-    transition: 0.2s background-color ease-in-out;
 }
 .list-item-button path{
     stroke: var(--txt-color);
     fill: var(--txt-color);
-    transition: stroke 0.2s ease-in-out, fill 0.2s ease-in-out;
 }
 
 .list-item-button:hover{
@@ -214,6 +227,7 @@ body {
 }
 
 .create-subject-form .save-button,
-.create-thematic-form .save-button{
+.create--form .save-button{
     margin-top: 1rem;
 }
+

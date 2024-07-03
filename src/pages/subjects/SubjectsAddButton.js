@@ -1,4 +1,4 @@
-import ColorMaker from "../../helpers/colorMaker";
+import colorMaker from "../../helpers/colorMaker";
 
 
 
@@ -13,7 +13,7 @@ export default class SubjectsAddButton extends HTMLButtonElement {
             window.currentSubject = {
                 id: +new Date() + '_subject',
                 name: "",
-                bgColor: ColorMaker.currentBgColor,
+                bgColor: colorMaker.currentBgColor,
             }
 
             window.openCreateSubjectForm();

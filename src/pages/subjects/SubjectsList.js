@@ -4,6 +4,7 @@ export default class SubjectsList extends HTMLElement{
     constructor() {
         customElements.define(SubjectItem.tag, SubjectItem);
         super();
+        this.isGenerated = false;
     }
 
     connectedCallback(){
@@ -11,6 +12,7 @@ export default class SubjectsList extends HTMLElement{
         this.classList.add('list', 'subjects-list');
     }
     generate(list = []){
+        if(this.isGenerated) return;
         Array.from(this.items).forEach(item => item.remove);
         if(list.length === 0){
             this.querySelector('.subjects-list-empty').classList.remove('d-none')
@@ -22,6 +24,7 @@ export default class SubjectsList extends HTMLElement{
                 subject.setSubjectModel({...item, save: false});
             }
         }
+        this.isGenerated = true;
     }
 
     async refreshByCurrentSubject(){

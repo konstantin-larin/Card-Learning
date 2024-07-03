@@ -1,4 +1,6 @@
 import SaveSubjectButton from "./SaveSubjectButton";
+import 'huebee/huebee.css';
+import Huebee from "huebee";
 
 export default class CreateSubjectForm extends HTMLFormElement {
     static tag = 'create-subject-form';
@@ -11,6 +13,7 @@ export default class CreateSubjectForm extends HTMLFormElement {
     }
 
     connectedCallback() {
+
         this.classList.add('create-subject-form');
         this.innerHTML = `
              <fieldset>
@@ -19,7 +22,7 @@ export default class CreateSubjectForm extends HTMLFormElement {
              </fieldset>                                    
              <fieldset>
              <label for="subjectBgColorInput">Цвет предмета:</label>
-                 <input type="color" id="subjectBgColorInput" name="subjectBgColorInput" value="${window.currentSubject.bgColor}">
+                 <input id="subjectBgColorInput" name="subjectBgColorInput" value="${window.currentSubject.bgColor}" readonly style="text-align: center; cursor: pointer;">
              </fieldset>
                         
               <button type="button" class="button save-button" is="${SaveSubjectButton.tag}">Сохранить</button>
@@ -33,6 +36,18 @@ export default class CreateSubjectForm extends HTMLFormElement {
                 }
             }
         }
+
+        const hueb = new Huebee('#subjectBgColorInput', {
+            customColors: [ '#C25', '#E62', '#EA0', '#19F', '#333' ],
+            saturations: 1,
+            shades: 7,
+            setBGColor: true,
+            setText: false,  // Отключает установку текста в поле ввода
+        });
+
+        hueb.on('change', (val) => {
+            document.getElementById('subjectBgColorInput').value = val;
+        });
     }
 
     async save() {
@@ -42,6 +57,7 @@ export default class CreateSubjectForm extends HTMLFormElement {
         const formData = new FormData(this);
         const name = formData.get("subjectNameInput")
         const bgColor = formData.get("subjectBgColorInput");
+        console.log(bgColor);
         if (name.length > 0) {
             window.currentSubject.name = name;
             window.currentSubject.bgColor = bgColor;

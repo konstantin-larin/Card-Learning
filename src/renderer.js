@@ -9,14 +9,16 @@ import "./reset.css";
 
 import PreloaderPage from "./pages/preloader/PreloaderPage";
 import SubjectsPage from "./pages/subjects/SubjectsPage";
-import ThematicsPage from "./pages/thematics/ThematicsPage";
+import TopicsPage from "./pages/topics/TopicsPage";
 import CardsPage from "./pages/cards/CardsPage";
 import ModalWindow from "./components/ModalWindow/ModalWindow";
+import colorMaker from "./helpers/colorMaker";
+import CreateTopicForm from "./pages/topics/CreateTopicForm";
 
 customElements.define(ModalWindow.tag, ModalWindow);
 customElements.define(PreloaderPage.tag, PreloaderPage);
 customElements.define(SubjectsPage.tag, SubjectsPage);
-customElements.define(ThematicsPage.tag, ThematicsPage);
+customElements.define(TopicsPage.tag, TopicsPage);
 customElements.define(CardsPage.tag, CardsPage);
 
 
@@ -44,22 +46,23 @@ window.toPage= async function (pageName){
                 break;
             }
             case 'subjects-page': {
+                colorMaker.setBgColor(colorMaker.lightColor);
                 document.getElementById('header').classList.remove('d-none');
                 document.getElementById('back-ref').classList.add('hidden');
                 appTitle.textContent = 'Card Learning';
                 break;
             }
-            case "thematics-page": {
+            case "topics-page": {
                 document.getElementById('header').classList.remove('d-none');
                 document.getElementById('back-ref').classList.remove('hidden');
-                appTitle.textContent = window.currentSubject?.title;
+                appTitle.textContent = window.currentSubject?.name;
                 backRefBtn.textContent = "К предметам";
                 break;
             }
             case "cards-page": {
                 document.getElementById('header').classList.remove('d-none');
                 document.getElementById('back-ref').classList.remove('hidden');
-                appTitle.textContent = window.currentThematic?.title;
+                appTitle.textContent = window.currentTopic?.title;
                 backRefBtn.textContent = "К темам";
 
             }
@@ -84,3 +87,15 @@ window.openCreateSubjectForm = function (){
     form.classList.add('create-item-form');
     document.getElementById('modal-window').open(form);
 }
+
+window.openCreateTopicForm = function (){
+    const form = document.createElement('form', {
+        is: CreateTopicForm.tag
+    });
+
+    form.classList.add('create-item-form');
+    document.getElementById('modal-window').open(form);
+}
+
+
+

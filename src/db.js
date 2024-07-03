@@ -4,8 +4,10 @@ export default async function loadDB(){
     const db = await openDB('learning_materials', 1, {
         upgrade(db, oldVersion, newVersion, transaction, event) {
             db.createObjectStore('subjects', {keyPath: 'id'});
-            db.createObjectStore('thematics', {keyPath: 'id'});
-            db.createObjectStore('cards', {keyPath: 'id'});
+            const topicStore = db.createObjectStore('topics', {keyPath: 'id'});
+            topicStore.createIndex('id_subject', 'id_subject');
+            const cardsStore = db.createObjectStore('cards', {keyPath: 'id'});
+            cardsStore.createIndex('id_topic', 'id_topic');
         },
         blocked(currentVersion, blockedVersion, event) {
             // …
@@ -44,9 +46,35 @@ export default async function loadDB(){
         async deleteSubject(id){
             const subjects = db.transaction("subjects", 'readwrite').objectStore("subjects");
             return await subjects.delete(id);
+        },
+
+        async getTopicsBySubject(subjectId){
+            const allTopics = await db.getAllFromIndex("topics", "id_subject", subjectId);
+            return allTopics;
+        },
+
+        async putTopic({
+                             id = +new Date() + '_topic',
+                             name= "Без названия",
+                             cardsColor = "inherit",
+                             id_subject,
+
+                         }){
+            const topic = {id, name, cardsColor, id_subject};
+            const topics = db.transaction("topics", 'readwrite').objectStore("topics");
+            topics.put(topic);
+        },
+
+        async getTopic(id){
+            const topics = db.transaction("topics", 'readwrite').objectStore("topics");
+            return await topics.get(id);
+        },
+
+        async deleteTopic(id){
+            const topics = db.transaction("topics", 'readwrite').objectStore("topics");
+            return await topics.delete(id);
         }
 
-    //     абстрактные методы управления бд, этот объект скрывает детали реализации, им могут пользоваться внешние компоненты
     }
     return dbAccess;
 }
