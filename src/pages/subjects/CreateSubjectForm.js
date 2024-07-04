@@ -57,7 +57,6 @@ export default class CreateSubjectForm extends HTMLFormElement {
         const formData = new FormData(this);
         const name = formData.get("subjectNameInput")
         const bgColor = formData.get("subjectBgColorInput");
-        console.log(bgColor);
         if (name.length > 0) {
             window.currentSubject.name = name;
             window.currentSubject.bgColor = bgColor;

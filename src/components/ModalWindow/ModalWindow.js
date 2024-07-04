@@ -20,17 +20,26 @@ export default class ModalWindow extends HTMLElement{
         closeElement.onclick = this.close.bind(this);
         this.append(closeElement);
     }
-    addContent(content){
+    async addContent(content){
         this.appendChild(content);
         this.content = content;
     }
 
     removeContent(){
-        if(this.content) this.content.remove();
+        if(this.content){
+            this.closeFunc();
+            this.content.remove();
+            delete  this.closeFunc;
+            delete this.content;
+        }
     }
 
-    open(content = null){
-        if(content) this.addContent(content);
+    async open(content = null, {
+        closeFunc = () => {
+        }
+    } = {}){
+        this.closeFunc = closeFunc;
+        if(content) await this.addContent(content);
         this.classList.remove("d-none");
     }
     close(){

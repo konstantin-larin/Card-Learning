@@ -55,12 +55,15 @@ export default class TopicItem extends HTMLElement {
     }
 
     async setTopicModel({id, name, cardsColor, id_subject, save = true}) {
+
         if (!this.isAdded) {
             throw new Error("Сначала добавьте элемент topic-item")
         }
 
         this._model = {id, name, id_subject, cardsColor};
-        if (save) await window.dbAccess.putTopic(this._model);
+        if (save){
+            await window.dbAccess.putTopic(this._model);
+        }
         this.id = id;
         this.querySelector('.list-item-name').textContent = name;
 
@@ -75,7 +78,8 @@ export default class TopicItem extends HTMLElement {
                         case 'choose': {
                             isChoosed = true;
                             window.currentTopic = structuredClone(this._model);
-                            await window.toPage('topics-page');
+                            colorMaker.setCardsColor(window.currentTopic.cardsColor);
+                            await window.toPage('cards-page');
                             return
                         }
                         case 'edit': {

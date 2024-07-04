@@ -1,6 +1,7 @@
 import SaveTopicButton from "./SaveTopicButton";
 import 'huebee/huebee.css';
 import Huebee from "huebee";
+import colorMaker from "../../helpers/colorMaker";
 
 export default class CreateTopicForm extends HTMLFormElement {
     static tag = 'create-topic-form';
@@ -55,13 +56,11 @@ export default class CreateTopicForm extends HTMLFormElement {
         const formData = new FormData(this);
         const name = formData.get("topicNameInput")
         const cardsColor = formData.get("topicCardsColorInput");
+
         if (name.length > 0) {
-            console.log("Вызываем сохраняем");
-            console.log(window.currentTopic);
             window.currentTopic.name = name;
             window.currentTopic.cardsColor = cardsColor;
-
-
+            colorMaker.setCardsColor(cardsColor);
             await document.querySelector("topics-list").refreshByCurrentTopic();
 
             document.getElementById('modal-window').close();

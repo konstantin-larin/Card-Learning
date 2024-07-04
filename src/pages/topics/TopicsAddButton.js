@@ -17,8 +17,6 @@ export default class TopicsAddButton extends HTMLButtonElement {
                 cardsColor: colorMaker.currentCardsColor,
             }
 
-            console.log("Добавляем", window.currentTopic);
-
             window.openCreateTopicForm();
         }
     }

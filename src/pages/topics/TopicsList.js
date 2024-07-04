@@ -14,7 +14,6 @@ export default class TopicsList extends HTMLElement{
     generate(list = []){
         if(this.isGenerated) return;
         Array.from(this.items).forEach(item => {
-            console.log(item);
             item.remove();
         });
         if(list.length === 0){
@@ -39,8 +38,7 @@ export default class TopicsList extends HTMLElement{
             this.append(topicItem);
         }
 
-
-        await topicItem.setTopicModel(structuredClone(window.currentTopic));
+        await topicItem.setTopicModel({...structuredClone(window.currentTopic), save: true});
 
         if(this.items.length > 0) {
             this.querySelector('.topics-list-empty').classList.add('d-none');

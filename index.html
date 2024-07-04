@@ -49,8 +49,21 @@
         </button>
     </div>
 </topics-page>
-<cards-page class="d-none"></cards-page>
-
+<cards-page class="d-none">
+    <div class="cards-list-container">
+        <cards-list class="cards-list" id="cards-list">
+            <div class="cards-list-empty list-empty d-none">
+                Список пуст!
+            </div>
+            <button is="cards-add-button" class="add-button list-add-button cards-add-button">
+                <svg viewBox="0 0 100 100">
+                    <line x1="50" y1="20" x2="50" y2="80" stroke-width="4"/>
+                    <line x1="20" y1="50" x2="80" y2="50" stroke-width="4"/>
+                </svg>
+            </button>
+        </cards-list>
+    </div>
+</cards-page>
 <script>
 </script>
 <script type="module" src="./src/renderer.js"></script>

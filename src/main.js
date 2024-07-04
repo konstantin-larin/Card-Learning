@@ -8,12 +8,13 @@ require('@electron/remote/main').initialize();
 if (require('electron-squirrel-startup')) {
     app.quit();
 }
-
+console.log(path.join(__dirname, '..', '..', 'src', 'assets/Card_Learning.ico'));
 const createWindow = () => {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        icon: path.join(__dirname, '..', '..', 'src', 'assets/Card_Learning.ico'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             enableRemoteModule: true,

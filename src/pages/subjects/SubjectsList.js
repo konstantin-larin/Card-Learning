@@ -39,7 +39,6 @@ export default class SubjectsList extends HTMLElement{
 
         await subjectItem.setSubjectModel(structuredClone(window.currentSubject));
 
-        console.log(this.items);
         if(this.items.length > 0) {
             this.querySelector('.subjects-list-empty').classList.add('d-none');
         }
