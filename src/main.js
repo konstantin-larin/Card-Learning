@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, Menu} = require('electron');
 const {URL} = require('url');
 const path = require('node:path');
 const fs = require('fs');
@@ -8,13 +8,23 @@ require('@electron/remote/main').initialize();
 if (require('electron-squirrel-startup')) {
     app.quit();
 }
-console.log(path.join(__dirname, '..', '..', 'src', 'assets/Card_Learning.ico'));
 const createWindow = () => {
     // Create the browser window.
+    const iconPath = path.join(__dirname, '..', '..', 'src', 'assets/Card_Learning');
+    let iconExtension = '.ico';
+
+    if (process.platform === 'win32') {
+        iconExtension = '.ico';
+    } else if (process.platform === 'darwin') {
+        iconExtension = '.icns';
+    } else {
+        iconExtension = '.png';
+    }
+
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        icon: path.join(__dirname, '..', '..', 'src', 'assets/Card_Learning.ico'),
+        icon: iconPath + iconExtension,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             enableRemoteModule: true,
@@ -32,6 +42,9 @@ const createWindow = () => {
         mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
     }
 
+
+    const emptyMenu = Menu.buildFromTemplate([]);
+    Menu.setApplicationMenu(emptyMenu);
 
     ipcMain.handle('save-image', async (event, imageData, fileName) => {
         const imagePath = path.join(app.getPath('userData'), 'images', fileName);
